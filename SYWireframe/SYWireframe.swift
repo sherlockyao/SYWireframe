@@ -73,8 +73,8 @@ open class SYWireframe {
 
     // MARK: Registration
     
-    public func register(builder: @escaping SYWireframeViewControllerBuilder, forName builderName: String) {
-        builders.updateValue(builder, forKey: builderName)
+    public func registerBuilder(name: String, builder: @escaping SYWireframeViewControllerBuilder) {
+        builders.updateValue(builder, forKey: name)
     }
     
     public func register(navigator: @escaping SYWireframeViewControllerNavigator, forName navigatorName: String) {
@@ -86,8 +86,8 @@ open class SYWireframe {
      - UIAlertController
      */
     public func registerDefaultBuilders() {
-
-        register(builder: { (params) -> UIViewController in
+        
+        registerBuilder(name: "alert") { (params) -> UIViewController in
             let alertController = UIAlertController(title: params["title"] as? String, message: params["message"] as? String, preferredStyle: .alert)
             if let actions = params["actions"] as? [UIAlertAction] {
                 for action in actions {
@@ -98,7 +98,7 @@ open class SYWireframe {
                 alertController.view.tintColor = color
             }
             return alertController
-            }, forName: "alert")
+        }
     }
     
     /**

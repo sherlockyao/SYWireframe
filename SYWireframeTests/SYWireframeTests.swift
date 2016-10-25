@@ -25,9 +25,11 @@ class SYWireframeTests: XCTestCase {
         super.setUp()
         
         wireframe = SYWireframe(plistFileName: "SYWireframe-Sample")
-        wireframe?.register(builder: { (params) -> UIViewController in
+        
+        wireframe?.registerBuilder(name: "list", builder: { (params) -> UIViewController in
             return UIViewController()
-            }, forName: "list")
+        })
+        
         wireframe?.registerDefaultNavigators()
     }
     
