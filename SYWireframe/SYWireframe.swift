@@ -77,8 +77,8 @@ open class SYWireframe {
         builders.updateValue(builder, forKey: name)
     }
     
-    public func register(navigator: @escaping SYWireframeViewControllerNavigator, forName navigatorName: String) {
-        navigators.updateValue(navigator, forKey: navigatorName)
+    public func registerNavigator(name: String, navigator: @escaping SYWireframeViewControllerNavigator) {
+        navigators.updateValue(navigator, forKey: name)
     }
     
     /**
@@ -112,36 +112,37 @@ open class SYWireframe {
      - animated-pop-root
      */
     public func registerDefaultNavigators() {
-        register(navigator: { (fromViewController, toViewController, completionHandler) -> Void in
+        
+        registerNavigator(name: "animated-present") { (fromViewController, toViewController, completionHandler) in
             fromViewController.present(toViewController, animated: true, completion: completionHandler)
-            }, forName: "animated-present")
+        }
         
-        register(navigator: { (fromViewController, toViewController, completionHandler) -> Void in
+        registerNavigator(name: "instant-present") { (fromViewController, toViewController, completionHandler) in
             fromViewController.present(toViewController, animated: false, completion: completionHandler)
-            }, forName: "instant-present")
+        }
         
-        register(navigator: { (fromViewController, toViewController, completionHandler) -> Void in
+        registerNavigator(name: "animated-dismiss") { (fromViewController, toViewController, completionHandler) in
             fromViewController.dismiss(animated: true, completion: completionHandler)
-            }, forName: "animated-dismiss")
+        }
         
-        register(navigator: { (fromViewController, toViewController, completionHandler) -> Void in
+        registerNavigator(name: "instant-dismiss") { (fromViewController, toViewController, completionHandler) in
             fromViewController.dismiss(animated: false, completion: completionHandler)
-            }, forName: "instant-dismiss")
+        }
         
-        register(navigator: { (fromViewController, toViewController, completionHandler) -> Void in
+        registerNavigator(name: "animated-push") { (fromViewController, toViewController, completionHandler) in
             fromViewController.navigationController?.pushViewController(toViewController, animated: true)
             completionHandler()
-            }, forName: "animated-push")
+        }
         
-        register(navigator: { (fromViewController, toViewController, completionHandler) -> Void in
+        registerNavigator(name: "animated-pop") { (fromViewController, toViewController, completionHandler) in
             _ = fromViewController.navigationController?.popViewController(animated: true)
             completionHandler()
-            }, forName: "animated-pop")
+        }
         
-        register(navigator: { (fromViewController, toViewController, completionHandler) -> Void in
+        registerNavigator(name: "animated-pop-root") { (fromViewController, toViewController, completionHandler) in
             _ = fromViewController.navigationController?.popToRootViewController(animated: true)
             completionHandler()
-            }, forName: "animated-pop-root")
+        }
     }
     
     // MARK: Configuration
