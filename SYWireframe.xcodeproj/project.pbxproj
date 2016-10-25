@@ -10,6 +10,8 @@
 		163C4AE71DBE136300DC761F /* SYWireframe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163C4ADD1DBE136300DC761F /* SYWireframe.framework */; };
 		163C4AEC1DBE136300DC761F /* SYWireframeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163C4AEB1DBE136300DC761F /* SYWireframeTests.swift */; };
 		163C4AEE1DBE136300DC761F /* SYWireframe.h in Headers */ = {isa = PBXBuildFile; fileRef = 163C4AE01DBE136300DC761F /* SYWireframe.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		163C4AF81DBE2E0000DC761F /* SYWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163C4AF71DBE2E0000DC761F /* SYWireframe.swift */; };
+		163C4AFA1DBE2E9600DC761F /* SYWireframeTransitionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163C4AF91DBE2E9600DC761F /* SYWireframeTransitionComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		163C4AE61DBE136300DC761F /* SYWireframeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SYWireframeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		163C4AEB1DBE136300DC761F /* SYWireframeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SYWireframeTests.swift; sourceTree = "<group>"; };
 		163C4AED1DBE136300DC761F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		163C4AF71DBE2E0000DC761F /* SYWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYWireframe.swift; sourceTree = "<group>"; };
+		163C4AF91DBE2E9600DC761F /* SYWireframeTransitionComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYWireframeTransitionComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 		163C4ADF1DBE136300DC761F /* SYWireframe */ = {
 			isa = PBXGroup;
 			children = (
+				163C4AF71DBE2E0000DC761F /* SYWireframe.swift */,
+				163C4AF91DBE2E9600DC761F /* SYWireframeTransitionComponent.swift */,
 				163C4AE01DBE136300DC761F /* SYWireframe.h */,
 				163C4AE11DBE136300DC761F /* Info.plist */,
 			);
@@ -148,6 +154,7 @@
 				TargetAttributes = {
 					163C4ADC1DBE136300DC761F = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					163C4AE51DBE136300DC761F = {
@@ -196,6 +203,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				163C4AFA1DBE2E9600DC761F /* SYWireframeTransitionComponent.swift in Sources */,
+				163C4AF81DBE2E0000DC761F /* SYWireframe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +329,7 @@
 		163C4AF21DBE136300DC761F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -331,6 +341,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sherlockyao.SYWireframe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -338,6 +349,7 @@
 		163C4AF31DBE136300DC761F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -356,6 +368,7 @@
 		163C4AF51DBE136300DC761F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SYWireframeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sherlockyao.SYWireframeTests;
@@ -367,6 +380,7 @@
 		163C4AF61DBE136300DC761F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SYWireframeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sherlockyao.SYWireframeTests;
@@ -394,6 +408,7 @@
 				163C4AF31DBE136300DC761F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		163C4AF41DBE136300DC761F /* Build configuration list for PBXNativeTarget "SYWireframeTests" */ = {
 			isa = XCConfigurationList;
@@ -402,6 +417,7 @@
 				163C4AF61DBE136300DC761F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
