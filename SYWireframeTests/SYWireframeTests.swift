@@ -9,28 +9,41 @@
 import XCTest
 @testable import SYWireframe
 
+class SYHomeViewController: UIViewController {
+    var executedFlag = false
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        executedFlag = true
+    }
+}
+
 class SYWireframeTests: XCTestCase {
+    
+    var wireframe: SYWireframe?
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        wireframe = SYWireframe(plistFileName: "SYWireframe-Sample")
+        wireframe?.register(builder: { (params) -> UIViewController in
+            return UIViewController()
+            }, forName: "list")
+        wireframe?.registerDefaultNavigators()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInitialization() {
+        XCTAssertNotNil(wireframe)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testNavigateToPort() {
+        let viewController = SYHomeViewController()
+        wireframe?.navigateTo(port: "List", gate: "Products", params: [String: AnyObject](), fromViewController: viewController) { () -> Void in
+            //do nothing
         }
+        XCTAssertTrue(viewController.executedFlag)
     }
-    
 }
