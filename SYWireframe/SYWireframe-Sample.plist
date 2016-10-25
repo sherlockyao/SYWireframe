@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Decodes</key>
+	<dict>
+		<key>Home</key>
+		<dict>
+			<key>class</key>
+			<string>SYHomeViewController</string>
+			<key>builder</key>
+			<string>home</string>
+		</dict>
+		<key>List</key>
+		<dict>
+			<key>class</key>
+			<string>SYListViewController</string>
+			<key>builder</key>
+			<string>list</string>
+		</dict>
+		<key>Detail</key>
+		<dict>
+			<key>class</key>
+			<string>SYDetailViewController</string>
+			<key>storyboard</key>
+			<string>SYMain</string>
+			<key>id</key>
+			<string>Detail</string>
+		</dict>
+	</dict>
+	<key>Destinations</key>
+	<dict>
+		<key>Home-List-Products</key>
+		<dict>
+			<key>target</key>
+			<string>List</string>
+			<key>navigator</key>
+			<string>instant-present</string>
+		</dict>
+		<key>List-Back</key>
+		<dict>
+			<key>navigator</key>
+			<string>animated-dismiss</string>
+		</dict>
+		<key>List-Form</key>
+		<dict>
+			<key>target</key>
+			<string>Detail</string>
+			<key>navigator</key>
+			<string>animated-present</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

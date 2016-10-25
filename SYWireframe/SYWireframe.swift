@@ -166,17 +166,17 @@ open class SYWireframe {
     // MARK: Routing Methods
     
     public func navigateTo(port: String, fromViewController: UIViewController) {
-        self.navigateTo(port: port, params: [String : AnyObject](), fromViewController: fromViewController)
+        navigateTo(port: port, params: [String : AnyObject](), fromViewController: fromViewController)
     }
     
     public func navigateTo(port: String, params: Dictionary<String, AnyObject>, fromViewController: UIViewController) {
-        self.navigateTo(port: port, params: params, fromViewController: fromViewController, completionHandler: { () -> Void in
+        navigateTo(port: port, params: params, fromViewController: fromViewController) { 
             // do nothing
-        })
+        }
     }
     
     public func navigateTo(port: String, params: Dictionary<String, AnyObject>, fromViewController: UIViewController, completionHandler: @escaping SYWireframeCompletionHandler) {
-        self.navigateTo(port: port, gate: nil, params: params, fromViewController: fromViewController, completionHandler: completionHandler)
+        navigateTo(port: port, gate: nil, params: params, fromViewController: fromViewController, completionHandler: completionHandler)
     }
     
     public func navigateTo(port: String, gate: String?, params: Dictionary<String, AnyObject>, fromViewController: UIViewController, completionHandler: @escaping SYWireframeCompletionHandler) {
