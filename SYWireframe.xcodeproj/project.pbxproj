@@ -12,7 +12,7 @@
 		163C4AEE1DBE136300DC761F /* SYWireframe.h in Headers */ = {isa = PBXBuildFile; fileRef = 163C4AE01DBE136300DC761F /* SYWireframe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		163C4AF81DBE2E0000DC761F /* SYWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163C4AF71DBE2E0000DC761F /* SYWireframe.swift */; };
 		163C4AFA1DBE2E9600DC761F /* SYWireframeComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163C4AF91DBE2E9600DC761F /* SYWireframeComponents.swift */; };
-		16C053531DBF3DA9007EE687 /* SYWireframe-Sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16C053521DBF3DA9007EE687 /* SYWireframe-Sample.plist */; };
+		164544761DC05DB400501EB3 /* SYWireframe-Sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 164544751DC05DB400501EB3 /* SYWireframe-Sample.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +34,7 @@
 		163C4AED1DBE136300DC761F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		163C4AF71DBE2E0000DC761F /* SYWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYWireframe.swift; sourceTree = "<group>"; };
 		163C4AF91DBE2E9600DC761F /* SYWireframeComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYWireframeComponents.swift; sourceTree = "<group>"; };
-		16C053521DBF3DA9007EE687 /* SYWireframe-Sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SYWireframe-Sample.plist"; sourceTree = "<group>"; };
+		164544751DC05DB400501EB3 /* SYWireframe-Sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SYWireframe-Sample.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,6 @@
 				163C4AF71DBE2E0000DC761F /* SYWireframe.swift */,
 				163C4AF91DBE2E9600DC761F /* SYWireframeComponents.swift */,
 				163C4AE01DBE136300DC761F /* SYWireframe.h */,
-				16C053521DBF3DA9007EE687 /* SYWireframe-Sample.plist */,
 				163C4AE11DBE136300DC761F /* Info.plist */,
 			);
 			path = SYWireframe;
@@ -90,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				163C4AEB1DBE136300DC761F /* SYWireframeTests.swift */,
+				164544751DC05DB400501EB3 /* SYWireframe-Sample.plist */,
 				163C4AED1DBE136300DC761F /* Info.plist */,
 			);
 			path = SYWireframeTests;
@@ -189,7 +189,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16C053531DBF3DA9007EE687 /* SYWireframe-Sample.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +196,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				164544761DC05DB400501EB3 /* SYWireframe-Sample.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
