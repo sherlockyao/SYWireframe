@@ -43,17 +43,33 @@ open class SYWireframe {
     private let decodes: Dictionary<String, Dictionary<String, String>>
     private let destinations: Dictionary<String, Dictionary<String, String>>
     
-    // view controller builders map: builderName -> builder
+    /// view controller builders map: builderName -> builder
     private var builders: Dictionary<String, SYWireframeBuilder>
     
-    // view controller navigators map: navigatorName -> navigator
+    /// view controller navigators map: navigatorName -> navigator
     private var navigators: Dictionary<String, SYWireframeNavigator>
     
     public var transition: SYWireframeTransition?
     
-    public init(plistFileName: String) {
-        let path = Bundle(for: type(of: self)).path(forResource: plistFileName, ofType: "plist")
-        let plist = NSDictionary(contentsOfFile: path!)!
+    
+    /// Initializes an instance of wireframe, it will load the .plist file in current bundle,
+    /// so make sure the file is in same bundle of your custom wireframe subclass
+    ///
+    /// - parameter plistName: the configuration .plist file name
+    ///
+    /// - returns: an instance of wireframe
+    public convenience init(plistName: String) {
+        let path = Bundle(for: type(of: self)).path(forResource: plistName, ofType: "plist")
+        self.init(plistPath: path!)
+    }
+    
+    /// Initializes an instance of wireframe, it will load the .plist file from the given path
+    ///
+    /// - parameter plistPath: the configuration .plist file path
+    ///
+    /// - returns: an instance of wireframe
+    public init(plistPath: String) {
+        let plist = NSDictionary(contentsOfFile: plistPath)!
         decodes = plist["Decodes"] as! Dictionary<String, Dictionary<String, String>>
         destinations = plist["Destinations"] as! Dictionary<String, Dictionary<String, String>>
         var codes = [String: String]()
@@ -69,25 +85,51 @@ open class SYWireframe {
 
     // MARK: Registration
     
+    
+    /// Register a builder with given name, 
+    /// the name should be the same with the one you put in .plist file
+    ///
+    /// - parameter builder: the builder instance
+    /// - parameter name:    name of the builder
     public func register(builder: SYWireframeBuilder, name: String) {
         builders.updateValue(builder, forKey: name)
     }
     
+    
+    /// Register a closure as an anonymous builder with given name,
+    /// the name should be the same with the one you put in .plist file
+    ///
+    /// - parameter builderName: name of the builder
+    /// - parameter closure:     the build function closure
     public func register(builderName: String, closure: @escaping (Dictionary<String, Any>?) -> UIViewController) {
         let builder = SYClosureWrapBuilder(closure: closure)
         register(builder: builder, name: builderName)
     }
     
+    
+    /// Register a navigator with given name,
+    /// the name should be the same with the one you put in .plist file
+    ///
+    /// - parameter navigator: the navigator instance
+    /// - parameter name:      name of the navigator
     public func register(navigator: SYWireframeNavigator, name: String) {
         navigators.updateValue(navigator, forKey: name)
     }
     
+    
+    /// Register a closure as an anonymous navigator with given name,
+    /// the name should be the same with the one you put in .plist file
+    ///
+    /// - parameter navigatorName: name of the navigator
+    /// - parameter closure:       the navigate function closure
     public func register(navigatorName: String, closure: @escaping (UIViewController, UIViewController, SYWireframeCompletionHandler?) -> Void) {
         let navigator = SYClosureWrapNavigator(closure: closure)
         register(navigator: navigator, name: navigatorName)
     }
     
     /**
+     Register some default builders which provoided by the framework
+     
      Default Builder list:
      - UIAlertController
      */
@@ -96,6 +138,8 @@ open class SYWireframe {
     }
     
     /**
+     Register some default navigators which provoided by the framework
+     
      Default Navigator list:
      - animated-present (animated == true)
      - instant-present (animated == false)
@@ -137,6 +181,17 @@ open class SYWireframe {
     
     // MARK: Routing Methods
     
+    
+    /// Perform navigation from the give view controller
+    ///
+    /// The method will find and initialize the destination view controller 
+    /// by given port & gate(if has), then use the relevant navigator to perform the navigatoin
+    ///
+    /// - parameter port:                 the port to navigate
+    /// - parameter gate:                 the gate of port to naviate
+    /// - parameter params:               the params for this navigation
+    /// - parameter sourceViewController: soure view controller of navigation
+    /// - parameter completion:           completion handler after the navigation is done
     public func navigateTo(port: String, gate: String? = nil, params: Dictionary<String, Any>? = nil, from sourceViewController: UIViewController, completion: SYWireframeCompletionHandler? = nil) {
         let destinationKey = generateDestinationKey(port: port, gate: gate, viewController: sourceViewController)
         
@@ -153,6 +208,18 @@ open class SYWireframe {
         }
     }
     
+    /// Create UIViewController instance with given code and params
+    /// It will look into plist file to decode the code and initializes the view controller
+    /// 
+    /// 1. If the view controller is configured to be init with a builder,
+    ///    the method will get the relevant builder to build the view controller
+    /// 2. If the view contrller is configured to be located in a storyboard,
+    ///    the method will load the view contrller from storyboard
+    ///
+    /// - parameter code:   the code the view controller
+    /// - parameter params: extra info/data for init the view controller
+    ///
+    /// - returns: the initialized view controller
     public func buildViewController(code: String?, params: Dictionary<String, Any>?) -> UIViewController {
         guard let code = code else {
             return UIViewController()

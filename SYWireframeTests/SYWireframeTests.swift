@@ -24,12 +24,11 @@ class SYWireframeTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        wireframe = SYWireframe(plistFileName: "SYWireframe-Sample")
-        
+        let path = Bundle(for: type(of: self)).path(forResource: "SYWireframe-Sample", ofType: "plist")
+        wireframe = SYWireframe(plistPath: path!)
         wireframe?.register(builderName: "list") { (params) -> UIViewController in
             return UIViewController()
         }
-        
         wireframe?.registerDefaultNavigators()
     }
     
