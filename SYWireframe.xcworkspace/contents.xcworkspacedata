@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Example-iOS/Example-iOS.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:SYWireframe.xcodeproj">
    </FileRef>
 </Workspace>
