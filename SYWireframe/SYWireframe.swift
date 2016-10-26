@@ -138,7 +138,7 @@ open class SYWireframe {
     // MARK: Routing Methods
     
     public func navigateTo(port: String, gate: String? = nil, params: Dictionary<String, Any>? = nil, from sourceViewController: UIViewController, completion: SYWireframeCompletionHandler? = nil) {
-        let destinationKey = destinationKeyFor(port: port, gate: gate, viewController: sourceViewController)
+        let destinationKey = generateDestinationKey(port: port, gate: gate, viewController: sourceViewController)
         
         if let destination = destinations[destinationKey] {
             let destinationCode = destination["target"]
@@ -173,7 +173,7 @@ open class SYWireframe {
     
     // MARK: Private Section
     
-    private func destinationKeyFor(port: String, gate: String? = nil, viewController: UIViewController) -> String {
+    private func generateDestinationKey(port: String, gate: String? = nil, viewController: UIViewController) -> String {
         let viewControllerName = String(describing: type(of: viewController))
         let code = codes[viewControllerName]!
         if let gate = gate {
