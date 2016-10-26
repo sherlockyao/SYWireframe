@@ -26,9 +26,9 @@ class SYWireframeTests: XCTestCase {
         
         wireframe = SYWireframe(plistFileName: "SYWireframe-Sample")
         
-        wireframe?.registerBuilder(name: "list", builder: { (params) -> UIViewController in
+        wireframe?.register(builderName: "list") { (params) -> UIViewController in
             return UIViewController()
-        })
+        }
         
         wireframe?.registerDefaultNavigators()
     }
@@ -43,9 +43,9 @@ class SYWireframeTests: XCTestCase {
     
     func testNavigateToPort() {
         let viewController = SYHomeViewController()
-        wireframe?.navigateTo(port: "List", gate: "Products", params: [String: AnyObject](), fromViewController: viewController) { () -> Void in
-            //do nothing
-        }
+        
+        wireframe?.navigateTo(port: "List", gate: "Products", from: viewController)
+        
         XCTAssertTrue(viewController.executedFlag)
     }
 }

@@ -8,10 +8,6 @@
 
 import UIKit
 
-public typealias SYWireframeCompletionHandler = () -> Void
-public typealias SYWireframeViewControllerBuilder = (Dictionary<String, AnyObject>) -> UIViewController
-public typealias SYWireframeViewControllerNavigator = (UIViewController, UIViewController, @escaping SYWireframeCompletionHandler) -> Void
-
 /**
  Wireframe deal with all the view controller initialization, configuration, navigation, transition etc. works.
  
@@ -48,12 +44,12 @@ open class SYWireframe {
     private let destinations: Dictionary<String, Dictionary<String, String>>
     
     // view controller builders map: builderName -> builder
-    private var builders: Dictionary<String, SYWireframeViewControllerBuilder>
+    private var builders: Dictionary<String, SYWireframeBuilder>
     
     // view controller navigators map: navigatorName -> navigator
-    private var navigators: Dictionary<String, SYWireframeViewControllerNavigator>
+    private var navigators: Dictionary<String, SYWireframeNavigator>
     
-    public var transitionComponent: SYWireframeTransitionComponent?
+    public var transition: SYWireframeTransition?
     
     public init(plistFileName: String) {
         let path = Bundle(for: type(of: self)).path(forResource: plistFileName, ofType: "plist")
@@ -67,18 +63,28 @@ open class SYWireframe {
             }
         }
         self.codes = codes
-        builders = [String: SYWireframeViewControllerBuilder]()
-        navigators = [String: SYWireframeViewControllerNavigator]()
+        builders = [String: SYWireframeBuilder]()
+        navigators = [String: SYWireframeNavigator]()
     }
 
     // MARK: Registration
     
-    public func registerBuilder(name: String, builder: @escaping SYWireframeViewControllerBuilder) {
+    public func register(builder: SYWireframeBuilder, name: String) {
         builders.updateValue(builder, forKey: name)
     }
     
-    public func registerNavigator(name: String, navigator: @escaping SYWireframeViewControllerNavigator) {
+    public func register(builderName: String, closure: @escaping (Dictionary<String, Any>?) -> UIViewController) {
+        let builder = SYClosureWrapBuilder(closure: closure)
+        register(builder: builder, name: builderName)
+    }
+    
+    public func register(navigator: SYWireframeNavigator, name: String) {
         navigators.updateValue(navigator, forKey: name)
+    }
+    
+    public func register(navigatorName: String, closure: @escaping (UIViewController, UIViewController, SYWireframeCompletionHandler?) -> Void) {
+        let navigator = SYClosureWrapNavigator(closure: closure)
+        register(navigator: navigator, name: navigatorName)
     }
     
     /**
@@ -86,19 +92,7 @@ open class SYWireframe {
      - UIAlertController
      */
     public func registerDefaultBuilders() {
-        
-        registerBuilder(name: "alert") { (params) -> UIViewController in
-            let alertController = UIAlertController(title: params["title"] as? String, message: params["message"] as? String, preferredStyle: .alert)
-            if let actions = params["actions"] as? [UIAlertAction] {
-                for action in actions {
-                    alertController.addAction(action)
-                }
-            }
-            if let color = params["color"] as? UIColor {
-                alertController.view.tintColor = color
-            }
-            return alertController
-        }
+        register(builder: SYAlertControllerBuilder(), name: "alert");
     }
     
     /**
@@ -113,87 +107,53 @@ open class SYWireframe {
      */
     public func registerDefaultNavigators() {
         
-        registerNavigator(name: "animated-present") { (fromViewController, toViewController, completionHandler) in
-            fromViewController.present(toViewController, animated: true, completion: completionHandler)
-        }
-        
-        registerNavigator(name: "instant-present") { (fromViewController, toViewController, completionHandler) in
-            fromViewController.present(toViewController, animated: false, completion: completionHandler)
-        }
-        
-        registerNavigator(name: "animated-dismiss") { (fromViewController, toViewController, completionHandler) in
-            fromViewController.dismiss(animated: true, completion: completionHandler)
-        }
-        
-        registerNavigator(name: "instant-dismiss") { (fromViewController, toViewController, completionHandler) in
-            fromViewController.dismiss(animated: false, completion: completionHandler)
-        }
-        
-        registerNavigator(name: "animated-push") { (fromViewController, toViewController, completionHandler) in
-            fromViewController.navigationController?.pushViewController(toViewController, animated: true)
-            completionHandler()
-        }
-        
-        registerNavigator(name: "animated-pop") { (fromViewController, toViewController, completionHandler) in
-            _ = fromViewController.navigationController?.popViewController(animated: true)
-            completionHandler()
-        }
-        
-        registerNavigator(name: "animated-pop-root") { (fromViewController, toViewController, completionHandler) in
-            _ = fromViewController.navigationController?.popToRootViewController(animated: true)
-            completionHandler()
-        }
+        register(navigator: SYBasicNavigator(type: .animatedPresent), name: "animated-present")
+        register(navigator: SYBasicNavigator(type: .instantPresent), name: "instant-present")
+        register(navigator: SYBasicNavigator(type: .animatedDismiss), name: "animated-dismiss")
+        register(navigator: SYBasicNavigator(type: .instantDismiss), name: "instant-dismiss")
+        register(navigator: SYBasicNavigator(type: .animatedPush), name: "animated-push")
+        register(navigator: SYBasicNavigator(type: .animatedPop), name: "animated-pop")
+        register(navigator: SYBasicNavigator(type: .animatedPopRoot), name: "animated-pop-root")
     }
-    
+
     // MARK: Configuration
     
     /**
      Override this method to setup your own configuration logic
      DO call super() while you override the method if you want reuse the transition setup flow
      
-     - parameter toViewController:   the view controller to be configured, i.e. the destination controller
-     - parameter fromViewController: the from view controller which present the configured controller
-     - parameter withParams:         parameters
+     - parameter to:   the view controller to be configured, i.e. the destination controller
+     - parameter from: the from view controller which present the configured controller
+     - parameter params:         parameters
      */
-    open func configureWith(toViewController: UIViewController, fromViewController: UIViewController, withParams: Dictionary<String, AnyObject>) {
-        if let transition = transitionComponent {
-            if let navigationController = toViewController as? UINavigationController {
-                transition.setupTransition(navigationController: navigationController)
+    open func configure(from soureViewController: UIViewController, to destinationViewController: UIViewController, params: Dictionary<String, Any>?) {
+        if let transition = transition {
+            if let navigationController = destinationViewController as? UINavigationController {
+                transition.setupTransition(for: navigationController)
             }
-            transition.setupTransition(fromViewController: fromViewController, toViewController: toViewController)
+            transition.setupTransition(from: soureViewController, to: destinationViewController)
         }
     }
     
     // MARK: Routing Methods
     
-    public func navigateTo(port: String, fromViewController: UIViewController) {
-        navigateTo(port: port, params: [String : AnyObject](), fromViewController: fromViewController)
-    }
-    
-    public func navigateTo(port: String, params: Dictionary<String, AnyObject>, fromViewController: UIViewController) {
-        navigateTo(port: port, params: params, fromViewController: fromViewController) { 
-            // do nothing
-        }
-    }
-    
-    public func navigateTo(port: String, params: Dictionary<String, AnyObject>, fromViewController: UIViewController, completionHandler: @escaping SYWireframeCompletionHandler) {
-        navigateTo(port: port, gate: nil, params: params, fromViewController: fromViewController, completionHandler: completionHandler)
-    }
-    
-    public func navigateTo(port: String, gate: String?, params: Dictionary<String, AnyObject>, fromViewController: UIViewController, completionHandler: @escaping SYWireframeCompletionHandler) {
-        let destinationKey = self.destinationKeyFor(port: port, gate: gate, viewController: fromViewController)
+    public func navigateTo(port: String, gate: String? = nil, params: Dictionary<String, Any>? = nil, from sourceViewController: UIViewController, completion: SYWireframeCompletionHandler? = nil) {
+        let destinationKey = destinationKeyFor(port: port, gate: gate, viewController: sourceViewController)
+        
         if let destination = destinations[destinationKey] {
-            let toCode = destination["target"]
-            let toViewController = buildViewControllerWith(code: toCode, params: params)
-            configureWith(toViewController: toViewController, fromViewController: fromViewController, withParams: params)
+            let destinationCode = destination["target"]
+            let destinationViewController = buildViewController(code: destinationCode, params: params)
+            
+            configure(from: sourceViewController, to: destinationViewController, params: params)
+            
             if let navigatorName = destination["navigator"] {
                 let navigator = navigators[navigatorName]!
-                navigator(fromViewController, toViewController, completionHandler)
+                navigator.navigate(from: sourceViewController, to: destinationViewController, completion: completion)
             }
         }
     }
     
-    public func buildViewControllerWith(code: String?, params: Dictionary<String, AnyObject>) -> UIViewController {
+    public func buildViewController(code: String?, params: Dictionary<String, Any>?) -> UIViewController {
         guard let code = code else {
             return UIViewController()
         }
@@ -203,7 +163,7 @@ open class SYWireframe {
         
         if let builderName = context["builder"] {
             let builder = builders[builderName]!
-            return builder(params)
+            return builder.buildViewController(params: params)
         } else {
             let storyboardName = context["storyboard"]!
             let identifier = context["id"]!
