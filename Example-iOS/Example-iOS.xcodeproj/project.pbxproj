@@ -15,6 +15,9 @@
 		164544971DC0D4DE00501EB3 /* SYWireframe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164544961DC0D4DE00501EB3 /* SYWireframe.framework */; };
 		1695F4811DC1FCBA0025278C /* Wireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1695F4801DC1FCBA0025278C /* Wireframe.swift */; };
 		1695F4831DC1FD1F0025278C /* Wireframe.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1695F4821DC1FD1F0025278C /* Wireframe.plist */; };
+		1695F4911DC206070025278C /* SellerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1695F4901DC206070025278C /* SellerViewController.xib */; };
+		1695F4931DC206190025278C /* SellerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1695F4921DC206190025278C /* SellerViewController.swift */; };
+		1695F4951DC206250025278C /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1695F4941DC206250025278C /* ProductViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		164544961DC0D4DE00501EB3 /* SYWireframe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SYWireframe.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SYWireframe-gutvswsyqmwsodbohwnhfoswjpsl/Build/Products/Debug-iphonesimulator/SYWireframe.framework"; sourceTree = "<group>"; };
 		1695F4801DC1FCBA0025278C /* Wireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wireframe.swift; sourceTree = "<group>"; };
 		1695F4821DC1FD1F0025278C /* Wireframe.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wireframe.plist; sourceTree = "<group>"; };
+		1695F4901DC206070025278C /* SellerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerViewController.xib; sourceTree = "<group>"; };
+		1695F4921DC206190025278C /* SellerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerViewController.swift; sourceTree = "<group>"; };
+		1695F4941DC206250025278C /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,11 +68,14 @@
 		164544821DC0D43A00501EB3 /* Example-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				1695F4821DC1FD1F0025278C /* Wireframe.plist */,
+				1695F4801DC1FCBA0025278C /* Wireframe.swift */,
 				164544831DC0D43A00501EB3 /* AppDelegate.swift */,
 				164544851DC0D43A00501EB3 /* HomeViewController.swift */,
-				1695F4801DC1FCBA0025278C /* Wireframe.swift */,
-				1695F4821DC1FD1F0025278C /* Wireframe.plist */,
 				164544871DC0D43A00501EB3 /* Main.storyboard */,
+				1695F4921DC206190025278C /* SellerViewController.swift */,
+				1695F4901DC206070025278C /* SellerViewController.xib */,
+				1695F4941DC206250025278C /* ProductViewController.swift */,
 				1645448A1DC0D43A00501EB3 /* Assets.xcassets */,
 				1645448C1DC0D43A00501EB3 /* LaunchScreen.storyboard */,
 				1645448F1DC0D43A00501EB3 /* Info.plist */,
@@ -142,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1645448E1DC0D43A00501EB3 /* LaunchScreen.storyboard in Resources */,
+				1695F4911DC206070025278C /* SellerViewController.xib in Resources */,
 				1645448B1DC0D43A00501EB3 /* Assets.xcassets in Resources */,
 				164544891DC0D43A00501EB3 /* Main.storyboard in Resources */,
 				1695F4831DC1FD1F0025278C /* Wireframe.plist in Resources */,
@@ -158,6 +168,8 @@
 				164544861DC0D43A00501EB3 /* HomeViewController.swift in Sources */,
 				164544841DC0D43A00501EB3 /* AppDelegate.swift in Sources */,
 				1695F4811DC1FCBA0025278C /* Wireframe.swift in Sources */,
+				1695F4951DC206250025278C /* ProductViewController.swift in Sources */,
+				1695F4931DC206190025278C /* SellerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

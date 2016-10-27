@@ -144,7 +144,7 @@ open class SYWireframe {
      - animated-present (animated == true)
      - instant-present (animated == false)
      - animated-dismiss
-     - instand-dismiss
+     - instant-dismiss
      - animated-push
      - animated-pop
      - animated-pop-root

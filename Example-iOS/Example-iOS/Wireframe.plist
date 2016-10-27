@@ -13,43 +13,46 @@
 			<key>id</key>
 			<string>Home</string>
 		</dict>
-		<key>List</key>
+		<key>Seller</key>
 		<dict>
 			<key>class</key>
-			<string>SYListViewController</string>
+			<string>SellerViewController</string>
 			<key>builder</key>
-			<string>list</string>
+			<string>seller</string>
 		</dict>
-		<key>Detail</key>
+		<key>Product</key>
 		<dict>
 			<key>class</key>
-			<string>SYDetailViewController</string>
-			<key>storyboard</key>
-			<string>SYMain</string>
-			<key>id</key>
-			<string>Detail</string>
+			<string>ProductViewController</string>
+			<key>builder</key>
+			<string>product</string>
 		</dict>
 	</dict>
 	<key>Destinations</key>
 	<dict>
-		<key>Home-List-Products</key>
+		<key>Home-Detail-Seller</key>
 		<dict>
 			<key>target</key>
-			<string>List</string>
+			<string>Seller</string>
 			<key>navigator</key>
-			<string>instant-present</string>
+			<string>animated-present</string>
 		</dict>
-		<key>List-Back</key>
+		<key>Home-Detail-Product</key>
+		<dict>
+			<key>target</key>
+			<string>Product</string>
+			<key>navigator</key>
+			<string>slide</string>
+		</dict>
+		<key>Seller-Back</key>
 		<dict>
 			<key>navigator</key>
 			<string>animated-dismiss</string>
 		</dict>
-		<key>List-Form</key>
+		<key>Product-Back</key>
 		<dict>
-			<key>target</key>
-			<string>Detail</string>
 			<key>navigator</key>
-			<string>animated-present</string>
+			<string>instant-dismiss</string>
 		</dict>
 	</dict>
 </dict>
