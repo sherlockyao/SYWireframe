@@ -13,6 +13,7 @@
 		1645448B1DC0D43A00501EB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1645448A1DC0D43A00501EB3 /* Assets.xcassets */; };
 		1645448E1DC0D43A00501EB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1645448C1DC0D43A00501EB3 /* LaunchScreen.storyboard */; };
 		164544971DC0D4DE00501EB3 /* SYWireframe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 164544961DC0D4DE00501EB3 /* SYWireframe.framework */; };
+		168692111DC2FC8F00E4AF56 /* WireframeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168692101DC2FC8F00E4AF56 /* WireframeTransition.swift */; };
 		1695F4811DC1FCBA0025278C /* Wireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1695F4801DC1FCBA0025278C /* Wireframe.swift */; };
 		1695F4831DC1FD1F0025278C /* Wireframe.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1695F4821DC1FD1F0025278C /* Wireframe.plist */; };
 		1695F4911DC206070025278C /* SellerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1695F4901DC206070025278C /* SellerViewController.xib */; };
@@ -29,6 +30,7 @@
 		1645448D1DC0D43A00501EB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1645448F1DC0D43A00501EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		164544961DC0D4DE00501EB3 /* SYWireframe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SYWireframe.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SYWireframe-gutvswsyqmwsodbohwnhfoswjpsl/Build/Products/Debug-iphonesimulator/SYWireframe.framework"; sourceTree = "<group>"; };
+		168692101DC2FC8F00E4AF56 /* WireframeTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WireframeTransition.swift; sourceTree = "<group>"; };
 		1695F4801DC1FCBA0025278C /* Wireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wireframe.swift; sourceTree = "<group>"; };
 		1695F4821DC1FD1F0025278C /* Wireframe.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wireframe.plist; sourceTree = "<group>"; };
 		1695F4901DC206070025278C /* SellerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SellerViewController.xib; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			children = (
 				1695F4821DC1FD1F0025278C /* Wireframe.plist */,
 				1695F4801DC1FCBA0025278C /* Wireframe.swift */,
+				168692101DC2FC8F00E4AF56 /* WireframeTransition.swift */,
 				164544831DC0D43A00501EB3 /* AppDelegate.swift */,
 				164544851DC0D43A00501EB3 /* HomeViewController.swift */,
 				164544871DC0D43A00501EB3 /* Main.storyboard */,
@@ -166,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				164544861DC0D43A00501EB3 /* HomeViewController.swift in Sources */,
+				168692111DC2FC8F00E4AF56 /* WireframeTransition.swift in Sources */,
 				164544841DC0D43A00501EB3 /* AppDelegate.swift in Sources */,
 				1695F4811DC1FCBA0025278C /* Wireframe.swift in Sources */,
 				1695F4951DC206250025278C /* ProductViewController.swift in Sources */,

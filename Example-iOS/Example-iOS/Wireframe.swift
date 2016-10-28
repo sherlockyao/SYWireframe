@@ -30,6 +30,7 @@ class Wireframe: SYWireframe {
         let wireframe = Wireframe(plistName: "Wireframe")
         wireframe.registerBuilders()
         wireframe.registerNavigators()
+        wireframe.transition = WireframeTransition()
         return wireframe
     }()
 
@@ -42,7 +43,7 @@ class Wireframe: SYWireframe {
         return buildViewController(code: WireframePort.home.rawValue, params: nil)
     }
     
-    // MARK - Registration for app's use cases
+    // MARK: - registration for app's use cases
     
     private func registerBuilders() {
         register(builderName: "seller") { (params) -> UIViewController in
