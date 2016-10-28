@@ -19,18 +19,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0U-hC-odN">
-                                <state key="normal" title="Detail"/>
+                                <state key="normal" title="Seller"/>
+                                <connections>
+                                    <action selector="sellerButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sjN-uo-eIn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZS-oj-Hal">
+                                <state key="normal" title="Product"/>
+                                <connections>
+                                    <action selector="productButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X6U-lx-LQV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="zZS-oj-Hal" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2RM-sF-yqE"/>
                             <constraint firstItem="M0U-hC-odN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DNl-GL-Cas"/>
+                            <constraint firstItem="zZS-oj-Hal" firstAttribute="top" secondItem="M0U-hC-odN" secondAttribute="bottom" constant="8" id="YyS-xN-EQC"/>
                             <constraint firstItem="M0U-hC-odN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="fIx-pe-Nux"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="24.800000000000001" y="34.632683658170919"/>
         </scene>
     </scenes>
 </document>

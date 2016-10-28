@@ -10,16 +10,16 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    //MARK: - Actions
+    
+    @IBAction func sellerButtonTouchUpInside(_ sender: AnyObject) {
+        Wireframe.sharedWireframe.navigateTo(port: .detail, gate: .seller, from: self)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func productButtonTouchUpInside(_ sender: AnyObject) {
+        let params = [ WireframeParam.name.rawValue: "iPhone7" ]
+        Wireframe.sharedWireframe.navigateTo(port: .detail, gate: .product, params: params, from: self)
     }
-
 
 }
 

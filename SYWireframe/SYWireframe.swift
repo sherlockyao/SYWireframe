@@ -83,7 +83,7 @@ open class SYWireframe {
         navigators = [String: SYWireframeNavigator]()
     }
 
-    // MARK: Registration
+    // MARK: - Registration
     
     
     /// Register a builder with given name, 
@@ -160,7 +160,7 @@ open class SYWireframe {
         register(navigator: SYBasicNavigator(type: .animatedPopRoot), name: "animated-pop-root")
     }
 
-    // MARK: Configuration
+    // MARK: - Configuration
     
     /**
      Override this method to setup your own configuration logic
@@ -179,7 +179,7 @@ open class SYWireframe {
         }
     }
     
-    // MARK: Routing Methods
+    // MARK: - Routing Methods
     
     
     /// Perform navigation from the give view controller
@@ -238,7 +238,7 @@ open class SYWireframe {
         }
     }
     
-    // MARK: Private Section
+    // MARK: - Private Section
     
     private func generateDestinationKey(port: String, gate: String? = nil, viewController: UIViewController) -> String {
         let viewControllerName = String(describing: type(of: viewController))

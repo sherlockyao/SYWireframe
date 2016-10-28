@@ -10,7 +10,7 @@ import UIKit
 
 public typealias SYWireframeCompletionHandler = () -> Void
 
-// MARK: Protocols
+// MARK: - Protocols
 
 /**
  Builder takes responsibility for initializing/creating view controllers
@@ -53,7 +53,7 @@ public protocol SYWireframeTransition {
     
 }
 
-// MARK: Default Builders
+// MARK: - Default Builders
 
 /**
  A typical alert controller builder
@@ -95,7 +95,7 @@ struct SYClosureWrapBuilder: SYWireframeBuilder {
     }
 }
 
-// MARK: Default Navigators
+// MARK: - Default Navigators
 
 enum SYNavigatorType {
     case animatedPresent, instantPresent

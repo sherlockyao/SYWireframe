@@ -42,7 +42,7 @@
 			<key>target</key>
 			<string>Product</string>
 			<key>navigator</key>
-			<string>slide</string>
+			<string>navigation-wrap</string>
 		</dict>
 		<key>Seller-Back</key>
 		<dict>

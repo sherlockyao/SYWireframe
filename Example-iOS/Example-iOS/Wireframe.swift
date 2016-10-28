@@ -11,6 +11,7 @@ import SYWireframe
 
 enum WireframePort: String {
     case home = "Home"
+    case back = "Back"
     case detail = "Detail"
 }
 
@@ -19,25 +20,48 @@ enum WireframeGate: String {
     case product = "Product"
 }
 
+enum WireframeParam: String {
+    case name = "name"
+}
+
 class Wireframe: SYWireframe {
 
     static let sharedWireframe: Wireframe = {
         let wireframe = Wireframe(plistName: "Wireframe")
-        wireframe.registerDefaultNavigators()
         wireframe.registerBuilders()
+        wireframe.registerNavigators()
         return wireframe
     }()
 
+    /// util method so wireframe can use enum value for "port" and "gate"
+    func navigateTo(port: WireframePort, gate: WireframeGate? = nil, params: Dictionary<String, Any>? = nil, from sourceViewController: UIViewController, completion: SYWireframeCompletionHandler? = nil) {
+        navigateTo(port: port.rawValue, gate: gate?.rawValue, params: params, from: sourceViewController, completion: completion)
+    }
+    
     func entry() -> UIViewController {
         return buildViewController(code: WireframePort.home.rawValue, params: nil)
     }
     
-    /// util method so wireframe can use enum value for "port" and "gate"
-    func navigateTo(port: WireframePort, gate: WireframeGate?, params: Dictionary<String, Any>?, from sourceViewController: UIViewController, completion: SYWireframeCompletionHandler?) {
-        navigateTo(port: port.rawValue, gate: gate?.rawValue, params: params, from: sourceViewController, completion: completion)
-    }
+    // MARK - Registration for app's use cases
     
     private func registerBuilders() {
+        register(builderName: "seller") { (params) -> UIViewController in
+            return SellerViewController(nibName: "SellerViewController", bundle: nil)
+        }
         
+        register(builderName: "product") { (params) -> UIViewController in
+            let productViewController = ProductViewController()
+            productViewController.productName = params?[WireframeParam.name.rawValue] as? String
+            return productViewController;
+        }
+    }
+    
+    private func registerNavigators() {
+        registerDefaultNavigators()
+        
+        register(navigatorName: "navigation-wrap") { (sourceViewController, destinationViewController, completion) in
+            let navigationController = UINavigationController(rootViewController: destinationViewController)
+            sourceViewController.present(navigationController, animated: false, completion: completion)
+        }
     }
 }
